@@ -1,0 +1,54 @@
+{
+   "abstract" : "Patch a file, with undo support",
+   "author" : [
+      "Steven Haryanto <stevenharyanto@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "File-Patch-Undoable",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Builtin::Logged" : 0,
+            "Log::Any" : 0,
+            "Rinci" : "v1.1.29",
+            "SHARYANTO::Proc::ChildError" : 0,
+            "perl" : "5.010001"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "File::Slurp" : 0,
+            "File::chdir" : 0,
+            "Test::More" : "0.98",
+            "Test::Perinci::Tx::Manager" : "0.42"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "homepage" : "http://metacpan.org/release/File-Patch-Undoable",
+      "repository" : {
+         "url" : "http://github.com/sharyanto/perl-File-Patch-Undoable"
+      }
+   },
+   "version" : "0.01"
+}
+

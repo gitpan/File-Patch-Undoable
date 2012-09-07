@@ -1,0 +1,29 @@
+---
+abstract: 'Patch a file, with undo support'
+author:
+  - 'Steven Haryanto <stevenharyanto@gmail.com>'
+build_requires:
+  File::Slurp: 0
+  File::chdir: 0
+  Module::Build: 0.3601
+  Test::More: 0.98
+  Test::Perinci::Tx::Manager: 0.42
+configure_requires:
+  Module::Build: 0.3601
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: File-Patch-Undoable
+requires:
+  Builtin::Logged: 0
+  Log::Any: 0
+  Rinci: v1.1.29
+  SHARYANTO::Proc::ChildError: 0
+  perl: 5.010001
+resources:
+  homepage: http://metacpan.org/release/File-Patch-Undoable
+  repository: http://github.com/sharyanto/perl-File-Patch-Undoable
+version: 0.01
