@@ -2,25 +2,10 @@ NAME
     File::Patch::Undoable - Patch a file, with undo support
 
 VERSION
-    version 0.01
-
-FAQ
-  Why use the patch program? Why not use a Perl module like Text::Patch?
-    The patch program has many nice features that Text::Patch lacks, e.g.
-    applying reverse patch (needed to check fixed state and to undo),
-    autodetection of patch type, ignoring whitespace and fuzz factor, etc.
-
-SEE ALSO
-    Rinci::Transaction
-
-    Text::Patch, PatchReader, Text::Patch::Rred
-
-DESCRIPTION
-    This module has Rinci metadata.
+    This document describes version 0.02 of File::Patch::Undoable (from Perl
+    distribution File-Patch-Undoable), released on 2014-05-06.
 
 FUNCTIONS
-    None are exported by default, but they are exportable.
-
   patch(%args) -> [status, msg, result, meta]
     Patch a file, with undo support.
 
@@ -83,18 +68,47 @@ FUNCTIONS
 
     Return value:
 
-    Returns an enveloped result (an array). First element (status) is an
-    integer containing HTTP status code (200 means OK, 4xx caller error, 5xx
-    function error). Second element (msg) is a string containing error
-    message, or 'OK' if status is 200. Third element (result) is optional,
-    the actual result. Fourth element (meta) is called result metadata and
-    is optional, a hash that contains extra information.
+    Returns an enveloped result (an array).
+
+    First element (status) is an integer containing HTTP status code (200
+    means OK, 4xx caller error, 5xx function error). Second element (msg) is
+    a string containing error message, or 'OK' if status is 200. Third
+    element (result) is optional, the actual result. Fourth element (meta)
+    is called result metadata and is optional, a hash that contains extra
+    information.
+
+FAQ
+  Why use the patch program? Why not use a Perl module like Text::Patch?
+    The patch program has many nice features that Text::Patch lacks, e.g.
+    applying reverse patch (needed to check fixed state and to undo),
+    autodetection of patch type, ignoring whitespace and fuzz factor, etc.
+
+KNOWN ISSUES
+SEE ALSO
+    Rinci::Transaction
+
+    Text::Patch, PatchReader, Text::Patch::Rred
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/File-Patch-Undoable>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/sharyanto/perl-File-Patch-Undoable>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=File-Patch-Undoable>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
 
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2012 by Steven Haryanto.
+    This software is copyright (c) 2014 by Steven Haryanto.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

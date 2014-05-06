@@ -1,17 +1,26 @@
 package File::Patch::Undoable;
 
-use 5.010;
+use 5.010001;
 use strict;
 use warnings;
 use Log::Any '$log';
 
 use Builtin::Logged qw(system);
+use Capture::Tiny qw(capture);
 use File::Temp qw(tempfile);
-use SHARYANTO::Proc::ChildError qw(explain_child_error);
+use Proc::ChildError qw(explain_child_error);
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 our %SPEC;
+
+sub _check_patch_has_dry_run_option {
+    # some versions of the 'patch' program, like that on freebsd, does not
+    # support the needed --dry-run option. we currently can't run on those
+    # systems.
+    my (undef, undef, $exit) = capture { system "patch --dry-run -v" };
+    return $exit == 0;
+}
 
 $SPEC{patch} = {
     v           => 1.1,
@@ -78,6 +87,9 @@ sub patch {
     defined($patch) or return [400, "Please specify patch"];
     my $rev        = !!$args{reverse};
 
+    return [412, "The patch program does not support --dry-run option"]
+        unless _check_patch_has_dry_run_option();
+
     my $is_sym  = (-l $file);
     my @st      = stat($file);
     my $exists  = $is_sym || (-e _);
@@ -138,9 +150,11 @@ sub patch {
 1;
 # ABSTRACT: Patch a file, with undo support
 
-
 __END__
+
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -148,31 +162,10 @@ File::Patch::Undoable - Patch a file, with undo support
 
 =head1 VERSION
 
-version 0.01
-
-=head1 FAQ
-
-=head2 Why use the patch program? Why not use a Perl module like Text::Patch?
-
-The B<patch> program has many nice features that L<Text::Patch> lacks, e.g.
-applying reverse patch (needed to check fixed state and to undo), autodetection
-of patch type, ignoring whitespace and fuzz factor, etc.
-
-=head1 SEE ALSO
-
-L<Rinci::Transaction>
-
-L<Text::Patch>, L<PatchReader>, L<Text::Patch::Rred>
-
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
+This document describes version 0.02 of File::Patch::Undoable (from Perl distribution File-Patch-Undoable), released on 2014-05-06.
 
 =head1 FUNCTIONS
 
-
-None are exported by default, but they are exportable.
 
 =head2 patch(%args) -> [status, msg, result, meta]
 
@@ -243,7 +236,46 @@ For more information on transaction, see L<Rinci::Transaction>.
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
+
+=head1 FAQ
+
+=head2 Why use the patch program? Why not use a Perl module like Text::Patch?
+
+The B<patch> program has many nice features that L<Text::Patch> lacks, e.g.
+applying reverse patch (needed to check fixed state and to undo), autodetection
+of patch type, ignoring whitespace and fuzz factor, etc.
+
+=head1 KNOWN ISSUES
+
+=head1 SEE ALSO
+
+L<Rinci::Transaction>
+
+L<Text::Patch>, L<PatchReader>, L<Text::Patch::Rred>
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/File-Patch-Undoable>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-File-Patch-Undoable>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=File-Patch-Undoable>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 =head1 AUTHOR
 
@@ -251,10 +283,9 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
