@@ -10,7 +10,7 @@ use Capture::Tiny qw(capture);
 use File::Temp qw(tempfile);
 use Proc::ChildError qw(explain_child_error);
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 our %SPEC;
 
@@ -162,7 +162,7 @@ File::Patch::Undoable - Patch a file, with undo support
 
 =head1 VERSION
 
-This document describes version 0.02 of File::Patch::Undoable (from Perl distribution File-Patch-Undoable), released on 2014-05-06.
+This document describes version 0.03 of File::Patch::Undoable (from Perl distribution File-Patch-Undoable), released on 2014-05-17.
 
 =head1 FUNCTIONS
 

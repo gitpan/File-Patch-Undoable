@@ -39,7 +39,7 @@
       },
       "test" : {
          "requires" : {
-            "File::Slurp" : "0",
+            "File::Slurp::Tiny" : "0",
             "File::Spec" : "0",
             "File::chdir" : "0",
             "IO::Handle" : "0",
@@ -61,7 +61,7 @@
          "web" : "https://github.com/sharyanto/perl-File-Patch-Undoable"
       }
    },
-   "version" : "0.02",
+   "version" : "0.03",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018001"
