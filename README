@@ -2,8 +2,8 @@ NAME
     File::Patch::Undoable - Patch a file, with undo support
 
 VERSION
-    This document describes version 0.03 of File::Patch::Undoable (from Perl
-    distribution File-Patch-Undoable), released on 2014-05-17.
+    This document describes version 0.04 of File::Patch::Undoable (from Perl
+    distribution File-Patch-Undoable), released on 2014-05-28.
 
 FUNCTIONS
   patch(%args) -> [status, msg, result, meta]
